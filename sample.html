@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<body class="w3-container" id="test" onload="createBarsSkeleton();createButtonsSkeleton()">
+
+<select id="mySelect" onchange="myFunction()">
+  <option value="Audi">Audi
+  <option value="BMW">BMW
+  <option value="Mercedes">Mercedes
+  
+</select>
+<select id="mySelect1" onchange="myFunction1()">
+<option value="0">0% 
+<option value="10">10%
+  <option value="20">20%
+  <option value="30">30%
+  <option value="40">40%
+<option value="50">50%
+  <option value="60">60%
+  <option value="70">70%
+  <option value="80">80%
+<option value="90">90%
+  <option value="100">100%
+  
+  
+</select>
+
+<p>When you select a new progress bar, a function is triggered which outputs the value of the selected progress bar.</p>
+
+<script>
+
+function createBarsSkeleton(){
+var data ={"buttons":[30,41,-42,-46],"bars":[32,85,76],"limit":200};
+
+var bars = data.bars.length;
+for(var i = 0; i < bars; i++)
+{
+
+ 	
+var newdiv = document.createElement('div'); 
+
+newdiv.className='w3-progress-container';
+
+var bar = document.createElement('input'); 
+bar.className='w3-progressbar';
+bar.setAttribute('id','myBar'+i);
+
+bar.setAttribute('value', data.bars[i]+"%");
+bar.style.width = data.bars[i]+"%";
+bar.style.textAlign = "center";
+bar.innerHTML = bar.style.width+"%"
+
+
+newdiv.appendChild(bar) +'<br/>';
+
+
+ 	  
+
+document.getElementById('test').appendChild(newdiv);
+
+}
+}
+
+
+function createButtonsSkeleton(){
+var data ={"buttons":[30,41,-42,-46],"bars":[32,85,76],"limit":200};
+
+var buttons = data.buttons.length;
+for(var i = 0; i < buttons; i++)
+{
+ 
+ 	
+var newdiv1 = document.createElement('div'); 
+
+
+
+var button = document.createElement('button'); 
+
+button.setAttribute('id','myBar'+i);
+button.setAttribute('value',data.buttons[i]);
+button.innerHTML=data.buttons[i];
+
+newdiv1.appendChild(button);
+
+newdiv1.style.cssFloat ="left";
+newdiv1.style.padding ="10px"
+newdiv1.onclick = function(x){
+inc(x.srcElement.innerText);
+}	  
+
+document.getElementById('test').appendChild(newdiv1);
+
+}
+}
+
+
+function myFunction() {
+   
+var x = document.getElementById("mySelect").value;
+if(x=="Audi"){
+
+var elem = document.getElementById("myBar0");
+  var width =  1;
+var w = elem.style.width;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if( w >= 32) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+document.getElementById("myBar0").value = elem.style.width;
+
+}
+
+if(x=="BMW"){
+
+
+
+var elem = document.getElementById("myBar1");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 85) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+
+
+document.getElementById("myBar1").value = elem.style.width;
+
+}
+
+
+if(x=="Mercedes"){
+
+
+
+
+var elem = document.getElementById("myBar2");
+  var width = 1;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 76) {
+      clearInterval(id);
+    } else {
+      width++;
+      elem.style.width = width + '%';
+    }
+  }
+
+
+
+document.getElementById("myBar2").value = elem.style.width;
+}
+
+   
+}
+
+function inc(z){
+var x = document.getElementById("mySelect").value;
+if(x=="Audi"){
+
+var progress1 = document.getElementById("myBar0");
+
+
+if(z.startsWith("-",0)){
+var num = progress1.value;
+if(num.startsWith("-",0)){
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+//alert(value);
+value = -(value+incordesc);
+}
+else{
+var num = progress1.value;
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+//alert(value);
+value = value - incordesc;
+}
+
+ }else{
+
+var num = progress1.value;
+if(num.startsWith("-",0)){
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+value = incordesc-value;
+}
+else{
+var num = progress1.value;
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+value = value + incordesc;
+}
+} 
+
+if(value>=140) value = 140;
+
+if(value>100){
+progress1.style.backgroundColor ="red";
+progress1.style.width = 100+"%";
+}else{
+
+progress1.style.backgroundColor ="#757575";
+
+}
+    
+  progress1.style.width = value +"%";
+//alert(progress.style.width);
+document.getElementById("myBar0").value = value +"%";
+if(value <=0){
+progress1.style.width = 0 +"%";
+progress1.value = 0+"%";
+document.getElementById("myBar0").style.width = 0+"%";
+document.getElementById("myBar0").value = value +"%";
+}
+}
+if(x=="BMW"){
+
+var progress2 = document.getElementById("myBar1");
+//alert(x);
+
+
+
+if(z.startsWith("-",0)){
+var num = progress2.value;
+if(num.startsWith("-",0)){
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+//alert(value);
+value = -(value+incordesc);
+}
+else{
+var num = progress2.value;
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+//alert(value);
+value = value - incordesc;
+}
+
+ }else{
+
+var num = progress2.value;
+if(num.startsWith("-",0)){
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+value = incordesc-value;
+}
+else{
+var num = progress2.value;
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+value = value + incordesc;
+}
+} 
+
+
+
+ if(value>=140) value = 140;
+
+if(value>100){
+progress2.style.backgroundColor ="red";
+
+}else{
+
+progress2.style.backgroundColor ="#757575";
+}
+    
+  progress2.style.width = value +"%";
+//alert(progress2.style.width);
+document.getElementById("myBar1").value = value +"%";
+if(value <=0){
+progress2.style.width = 0 +"%";
+progress2.value = 0+"%";
+document.getElementById("myBar1").style.width = 0+"%";
+document.getElementById("myBar1").value = value +"%";
+}
+
+}
+if(x=="Mercedes"){
+
+var progress3 = document.getElementById("myBar2");
+
+
+
+if(z.startsWith("-",0)){
+var num = progress3.value;
+if(num.startsWith("-",0)){
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+//alert(value);
+value = -(value+incordesc);
+}
+else{
+var num = progress3.value;
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+//alert(value);
+value = value - incordesc;
+}
+
+ }else{
+
+var num = progress3.value;
+if(num.startsWith("-",0)){
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+value = incordesc-value;
+}
+else{
+var num = progress3.value;
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+var incordesc = parseInt(z.replace(/^[^0-9]+/, ''), 10);
+value = value + incordesc;
+}
+} 
+
+
+
+
+  if(value>=140) value = 140;
+
+if(value>100){
+progress3.style.backgroundColor ="red";
+
+}else{
+
+progress3.style.backgroundColor ="#757575";
+}
+    
+  progress3.style.width = value +"%";
+
+document.getElementById("myBar2").value = value +"%";
+if(value <=0){
+progress3.style.width = 0 +"%";
+progress3.value = 0+"%";
+document.getElementById("myBar2").style.width = 0+"%";
+document.getElementById("myBar2").value = value +"%";
+}
+
+}
+
+}
+
+
+function desc(){
+var x = document.getElementById("mySelect").value;
+if(x=="Audi"){
+
+var progress = document.getElementById("myBar1");
+alert(x);
+var num = progress.style.width;
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+    
+alert(value);
+value = value - 10;
+  if(value>=100) value = 100;
+ 
+  progress.style.width = value +"%";
+alert(progress.style.width);
+
+}
+if(x=="BMW"){
+
+var progress = document.getElementById("myBar2");
+alert(x);
+var num = progress.style.width;
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+    
+alert(value);
+value = value - 10;
+  if(value>=100) value = 100;
+    
+  progress.style.width = value +"%";
+alert(progress.style.width);
+
+}
+if(x=="Mercedes"){
+
+var progress = document.getElementById("myBar3");
+
+var num = progress.style.width;
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+    
+alert(value);
+value = value - 10;
+  if(value>=230) value = 230;
+    
+  progress.style.width = value +"%";
+alert(progress.style.width);
+
+}
+
+}
+
+function myFunction1(){
+
+var x = document.getElementById("mySelect").value;
+
+if(x=="Audi"){
+var y = document.getElementById("mySelect1").value;
+
+var per = parseInt(y.replace(/^[^0-9]+/, ''), 10);
+
+var progress1 = document.getElementById("myBar0");
+
+var num = progress1.value;
+
+if(num.startsWith("-",0)){
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+
+    
+alert(value);
+value = per - value;
+}else{
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+
+    
+alert(value);
+value = value + per;
+}
+
+  if(value>100){
+progress1.style.backgroundColor ="red";
+progress1.value =100+"%"
+}else{
+
+progress1.style.backgroundColor ="#757575";
+}
+    
+  progress1.style.width = value +"%";
+document.getElementById("myBar0").value = value + '%';
+alert(progress1.style.width);
+
+}
+if(x=="BMW"){
+
+//var x = document.getElementById("mySelect").value;
+var y = document.getElementById("mySelect1").value;
+
+var per = parseInt(y.replace(/^[^0-9]+/, ''), 10);
+
+
+var progress1 = document.getElementById("myBar1");
+
+var num = progress1.value;
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+
+    
+alert(value);
+value = value + per;
+ if(value>100){
+progress1.style.backgroundColor ="red";
+progress1.style.width =100+"%"
+}else{
+
+progress1.style.backgroundColor ="#757575";
+}
+    
+  progress1.style.width = value +"%";
+document.getElementById("myBar1").value = value + '%';
+alert(progress1.style.width);
+
+
+}
+if(x=="Mercedes"){
+
+//var x = document.getElementById("mySelect").value;
+var y = document.getElementById("mySelect1").value;
+
+var per = parseInt(y.replace(/^[^0-9]+/, ''), 10);
+
+
+var progress1 = document.getElementById("myBar2");
+
+var num = progress1.value;
+
+var value = parseInt(num.replace(/^[^0-9]+/, ''), 10);
+
+    
+alert(value);
+value = value + per;
+ if(value>100){
+progress1.style.backgroundColor ="red";
+progress1.style.width =100+"%"
+
+}else{
+
+progress1.style.backgroundColor ="#757575";
+}
+    
+  progress1.style.width = value +"%";
+document.getElementById("myBar2").value = value + '%';
+
+
+}
+
+}
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
+
+
